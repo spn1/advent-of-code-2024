@@ -2,7 +2,6 @@ import csv
 
 left = []
 right = []
-diffs = []
 
 with open('./input.txt', 'r') as file:
     reader = csv.reader(file)
@@ -12,20 +11,34 @@ with open('./input.txt', 'r') as file:
         right.append(int(numbers[1]))
 
 
-def main():
-    left.sort()
-    right.sort()
 
+left.sort()
+right.sort()
+
+
+def part_one():
+    diffs = []
     for i in range(len(left)):
         diffs.append(
             abs(
                 left[i] - right[i]
-            )
+            )   
         )
+    return sum(diffs)
 
-    print(diffs)
-    print(sum(diffs))
+
+def part_two():
+    products = []
+    product_cache = {}
+    for i in range(len(left)):
+        n = left[i]
+        product = product_cache[n] if product_cache.get(n) else n * right.count(n)
+        products.append(product)
+        if not product_cache.get(n): product_cache[n] = product
+
+    return sum(products)
 
 
 if __name__ == '__main__':
-    main()
+    print(part_one())
+    print(part_two())
