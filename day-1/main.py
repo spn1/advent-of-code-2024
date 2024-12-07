@@ -11,7 +11,6 @@ with open('./input.txt', 'r') as file:
         right.append(int(numbers[1]))
 
 
-
 left.sort()
 right.sort()
 
